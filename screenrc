@@ -1,0 +1,40 @@
+#must be saved as $HOME/.screenrc
+
+altscreen on
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+
+# warning of activity
+activity "Activity in %t(%n)"
+
+# Left Right meta key mods
+bindkey "^[<" eval number !echo $WINDOW-1|bc
+bindkey "^[>" eval number !echo $WINDOW+1|bc
+bindkey "^[," prev
+bindkey "^[." next
+
+# Keybindings 
+# bind F6  to detach screen session from this terminal
+# bind F7  to kill current screen window.
+# bind F8  to create a new screen
+# bind F9  to rename current screen window
+# bind F10 to move to previous window
+# bind F12 to move to next window
+bindkey -k k6 detach
+bindkey -k k7 kill
+bindkey -k k8 screen
+bindkey -k k9 title
+bindkey -k k; prev
+bindkey -k F2 next
+
+termcapinfo xterm* 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+shelltitle :~#|bash
+
+caption string "%?%F%{= gk}%:%{= wk}%? %n %?%F%{= wk}%? %C%A %{= wk} %t%= "
+
+# Creates some "screens" inside the screen
+screen -t sc0 0 
+screen -t sc1 1 
+# Select a default "screen"
+select 0
