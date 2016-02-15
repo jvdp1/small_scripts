@@ -1,0 +1,17 @@
+#!/bin/bash
+#.screen_lance
+scr=`screen -ls |awk 'NR==1 {print $1}'`
+if [ $scr = 'No' ]; then
+ echo -e 'There is no available screen!'
+else
+ screen -ls
+ scr=`screen -ls |awk -F'.' 'NR==2 {print $1}'`
+ while true; do
+  read -e -p "***Do you want to attach to the first screen (y/n)***?" answer
+  case $answer in
+   [Yy]* ) echo " You will be attached to the first screen!";sleep 1; screen -r $scr ; break;;
+   [Nn]* ) echo " You are on the main terminal!";break;;
+   * ) echo "Your answr is $answer. Please, use y or n!";;
+  esac
+ done
+fi
